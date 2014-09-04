@@ -28,6 +28,6 @@
     "uglify-js": "^2.4.15"
   },
   "scripts": {
-    "build": "node_modules/.bin/browserify --extension=.jsx -t reactify site/src/main.jsx | node_modules/.bin/uglifyjs > site/index.js"
+    "build": "node_modules/.bin/browserify --extension=.jsx -t reactify example/src/main.jsx | node_modules/.bin/uglifyjs > example/index.js"
   }
 }
