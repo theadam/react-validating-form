@@ -5,6 +5,7 @@ var React = require('react');
 var ValidatingForm = require('../../index').ValidatingForm;
 var ValidatingInput = require('../../index').ValidatingInput;
 var Well = require('react-bootstrap').Well;
+var Button = require('react-bootstrap').Button;
 
 var userSchema = Schema({
   username: Field.required('Username is required', {
@@ -23,8 +24,8 @@ var userSchema = Schema({
 
 var Example1 = React.createClass({
 
-  handleSubmit: function(){
-    alert(JSON.stringify(this.refs.form.getValue()));
+  handleSubmit: function(value){
+    alert(JSON.stringify(value));
   },
 
   render: function(){
@@ -51,6 +52,10 @@ var Example1 = React.createClass({
             type='password'
             placeholder='Re-enter Password'
             wrapperClassName={wrapperClassName}/>
+          <Button
+            bsStyle='primary'
+            type='submit'
+            className='pull-right'>Register</Button>
         </ValidatingForm>
       </Well>
     );
