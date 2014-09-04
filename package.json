@@ -1,0 +1,33 @@
+{
+  "name": "react-validating-form",
+  "description": "A validating form for use with React",
+  "author": "Adam Nalisnick <theadam4257@gmail.com>",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theadam/react-validating-form.git"
+  },
+  "bugs": "https://github.com/theadam/react-validating-form/issues",
+  "keywords": [
+    "validation",
+    "react",
+    "form"
+  ],
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "react": "^0.11.1",
+    "react-bootstrap": "^0.11.1"
+  },
+  "devDependencies": {
+    "browserify": "^5.11.0",
+    "node-schema": "^2.0.0",
+    "reactify": "^0.14.0",
+    "string-validator": "^1.0.5",
+    "uglify-js": "^2.4.15"
+  },
+  "scripts": {
+    "build": "node_modules/.bin/browserify --extension=.jsx -t reactify site/src/main.jsx | node_modules/.bin/uglifyjs > site/index.js"
+  }
+}
