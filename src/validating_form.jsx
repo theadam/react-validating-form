@@ -1,6 +1,5 @@
 var React = require('react/addons');
 var reactBootstrap = require('react-bootstrap');
-var Button = reactBootstrap.Button;
 var _ = require('lodash');
 var cx = React.addons.classSet;
 var cloneWithProps = React.addons.cloneWithProps;
@@ -18,7 +17,6 @@ module.exports = React.createClass({
 
   getDefaultProps: function(){
     return {
-      submitLabel: "Submit",
       horizontal: false
     }
   },
@@ -60,11 +58,6 @@ module.exports = React.createClass({
     return this.transferPropsTo(
       <form className={classes} onSubmit={this.submit} action=''>
         {this.renderChildren()}
-
-        <Button
-          bsStyle='primary'
-          type='submit'
-          className='pull-right'>{this.props.submitLabel}</Button>
       </form>
     );
   },
@@ -113,7 +106,7 @@ module.exports = React.createClass({
     this.handleErrors(function(errors){
       if(_.isEmpty(errors)){
         if(component.props.onSubmit){
-          component.props.onSubmit();
+          component.props.onSubmit(component.getValue());
         }
       }
       else{
