@@ -15,6 +15,14 @@
   }
 }
 
+.state-div{
+  width: 30%;
+  margin-left: 3.33333%;
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .example input{
   width: 100%;
 }
