@@ -3,6 +3,18 @@
   margin: auto;
 }
 
+@media (max-width: 1200px){
+  .example{
+    width: 75%;
+  }
+}
+
+@media (max-width: 800px){
+  .example{
+    width: 100%;
+  }
+}
+
 .example input{
   width: 100%;
 }
