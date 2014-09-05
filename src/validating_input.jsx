@@ -6,13 +6,15 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       isValidating: false,
+      timeoutId: null
     }
   },
 
   getDefaultProps: function(){
     return {
       type: 'text',
-      errorStyle: 'error'
+      errorStyle: 'error',
+      timeout: 500
     };
   },
 
@@ -38,7 +40,14 @@ module.exports = React.createClass({
   },
 
   handleChange: function(event){
-    this.startValidating();
+    var timeoutId = this.state.timeoutId;
+    if(timeoutId !== null){
+      clearTimeout(timeoutId);
+    }
+    if(!(this.props.timeout < 0)){
+      timeoutId = setTimeout(this.startValidating, this.props.timeout);
+      this.setState({timeoutId: timeoutId});
+    }
     if(this.props.onChange){
       this.props.onChange(event);
     }
