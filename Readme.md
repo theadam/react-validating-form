@@ -10,7 +10,6 @@ var Example1 = React.createClass({
   },
 
   render: function(){
-    var wrapperClassName='col-xs-12';
     return (
       <Well className="example">
         <ValidatingForm

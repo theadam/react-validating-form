@@ -3,10 +3,11 @@ var reactBootstrap = require('react-bootstrap');
 var _ = require('lodash');
 var cx = React.addons.classSet;
 var cloneWithProps = React.addons.cloneWithProps;
-
-var noop = function(){};
+var NestedMixin = require('./nested_mixin');
 
 module.exports = React.createClass({
+
+  mixins: [NestedMixin],
 
   propTypes: {
     schema: React.PropTypes.shape({
@@ -31,23 +32,6 @@ module.exports = React.createClass({
     this.handleErrors();
   },
 
-  renderChildren: function(){
-    var component = this;
-    return React.Children.map(this.props.children, function(child){
-      var field = child.props.field;
-      if(field === undefined){
-        return child;
-      }
-
-      return cloneWithProps(child, {
-        key: field,
-        ref: field,
-        error: component.state.errors[field],
-        onChange: component.handleErrors,
-      });
-    });
-  },
-
   render: function(){
 
     var classes = cx({
@@ -57,25 +41,15 @@ module.exports = React.createClass({
 
     return this.transferPropsTo(
       <form className={classes} onSubmit={this.submit} action=''>
-        {this.renderChildren()}
+        {this.renderChildren(this.state.errors)}
       </form>
     );
-  },
-
-  getValue: function(){
-    var fieldsToValidate = {};
-
-    _.forIn(this.refs, function(input, field){
-      fieldsToValidate[field] = input.getValue();
-    });
-
-    return fieldsToValidate;
   },
 
   handleErrors: function(next){
     var component = this;
     var fieldsToValidate = this.getValue();
-    next = next || noop;
+    next = next || _.noop;
 
     var validationHandler = function(errors){
       errors = errors || {};
@@ -110,12 +84,11 @@ module.exports = React.createClass({
         }
       }
       else{
-        _.forIn(component.refs, function(input){
-          input.startValidating();
-        });
+        component.startValidating();
       }
     });
 
     return false; // Avoid page refresh
-  }
+  },
+
 });

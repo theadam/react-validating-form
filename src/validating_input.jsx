@@ -17,14 +17,14 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    var hasErrors = this.state.isValidating && this.props.error;
+    var hasErrors = this.state.isValidating && this.props.errors;
     return this.transferPropsTo(
       <Input
         onBlur={this.startValidating}
         onChange={this.handleChange}
         ref="input"
         hasFeedback
-        help={hasErrors ? _.first(this.props.error) : null}
+        help={hasErrors ? _.first(this.props.errors) : null}
         bsStyle={hasErrors ? this.props.errorStyle : null} />
     );
   },
