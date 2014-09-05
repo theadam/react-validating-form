@@ -67,47 +67,47 @@ var Example1 = React.createClass({
           <div className='col-xs-12'>
             <ValidatingInput
               field='username'
-              placeholder='Enter Username'/>
+              placeholder='Username'/>
             <ValidatingInput
               field='password'
               type='password'
-              placeholder='Enter Password'/>
+              placeholder='Password'/>
             <ValidatingInput
               field='passwordCheck'
               type='password'
-              placeholder='Re-enter Password'/>
+              placeholder='Re-Enter Password'/>
               <NestedValue className='nested' field='name'>
                 <div className='form-header'>Name</div>
                 <ValidatingInput
                   field='first'
-                  placeholder='Enter First Name'/>
+                  placeholder='First Name'/>
                 <ValidatingInput
                   field='last'
-                  placeholder='Enter Last Name'/>
+                  placeholder='Last Name'/>
               </NestedValue>
               <NestedValue className='nested' field='address'>
                 <div className='form-header'>Address</div>
                 <ValidatingInput
                   field='street1'
-                  placeholder='Enter Street'/>
+                  placeholder='Street'/>
                 <ValidatingInput
                   field='street2'
-                  placeholder='Enter Street 2'/>
+                  placeholder='Street 2'/>
                 <div className='row'>
                   <div className='col-xs-8'>
                     <ValidatingInput
                       field='city'
-                      placeholder='Enter City'/>
+                      placeholder='City'/>
                   </div>
-                  <div className='col-xs-offset-1 col-xs-3'>
+                  <div className='state-div'>
                     <ValidatingInput
                       field='state'
-                      placeholder='Enter State'/>
+                      placeholder='State'/>
                   </div>
                 </div>
                 <ValidatingInput
                   field='zipCode'
-                  placeholder='Enter Zip Code'/>
+                  placeholder='Zip Code'/>
               </NestedValue>
             <Button
               bsStyle='primary'
