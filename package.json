@@ -30,6 +30,6 @@
   },
   "scripts": {
     "build": "node_modules/.bin/browserify --extension=.jsx -t reactify example/src/main.jsx | node_modules/.bin/uglifyjs > example/index.js",
-    "watchify": "node_modules/.bin/watchify --extension=.jsx -v -t reactify example/src/main.jsx -o example/index.js"
+    "watchify": "node_modules/.bin/watchify --debug --extension=.jsx -v -t reactify example/src/main.jsx -o example/index.js"
   }
 }

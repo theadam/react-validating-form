@@ -26,7 +26,7 @@ module.exports = {
         key: field,
         ref: field,
         errors: errors[field],
-        onChange: component.handleErrors,
+        onChange: component.onChildChange,
       });
     };
 

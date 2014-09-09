@@ -14,15 +14,23 @@ module.exports = React.createClass({
     return {
       type: 'text',
       errorStyle: 'error',
-      timeout: 500
+      timeout: 500,
+      onChange: _.noop,
+      onBlur: _.noop
     };
+  },
+
+  componentDidMount: function(){
+    if(this.props.autofocus){
+      this.refs.input.getInputDOMNode().focus();
+    }
   },
 
   render: function(){
     var hasErrors = this.state.isValidating && this.props.errors;
     return this.transferPropsTo(
       <Input
-        onBlur={this.startValidating}
+        onBlur={this.handleBlur}
         onChange={this.handleChange}
         ref="input"
         hasFeedback
@@ -39,6 +47,11 @@ module.exports = React.createClass({
     }
   },
 
+  handleBlur: function(event){
+    this.startValidating();
+    this.props.onBlur(event);
+  },
+
   handleChange: function(event){
     var timeoutId = this.state.timeoutId;
     if(timeoutId !== null){
@@ -48,9 +61,7 @@ module.exports = React.createClass({
       timeoutId = setTimeout(this.startValidating, this.props.timeout);
       this.setState({timeoutId: timeoutId});
     }
-    if(this.props.onChange){
-      this.props.onChange(event);
-    }
+    this.props.onChange(event);
   },
 
   getValue: function(){

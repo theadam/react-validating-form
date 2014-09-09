@@ -18,7 +18,9 @@ module.exports = React.createClass({
 
   getDefaultProps: function(){
     return {
-      horizontal: false
+      horizontal: false,
+      onSubmit: _.noop,
+      onSubmitErrors: _.noop
     }
   },
 
@@ -33,7 +35,6 @@ module.exports = React.createClass({
   },
 
   render: function(){
-
     var classes = cx({
       'form-horizontal': this.props.horizontal,
       clearfix: true
@@ -44,6 +45,10 @@ module.exports = React.createClass({
         {this.renderChildren(this.state.errors)}
       </form>
     );
+  },
+
+  onChildChange: function(event){
+    this.handleErrors();
   },
 
   handleErrors: function(next){
@@ -79,12 +84,11 @@ module.exports = React.createClass({
 
     this.handleErrors(function(errors){
       if(_.isEmpty(errors)){
-        if(component.props.onSubmit){
-          component.props.onSubmit(component.getValue());
-        }
+        component.props.onSubmit(component.getValue());
       }
       else{
         component.startValidating();
+        component.props.onSubmitErrors(component.getValue());
       }
     });
 
