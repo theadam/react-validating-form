@@ -43,18 +43,11 @@ var defaultPatterns = {
   '*': /[A-Za-z0-9]/
 };
 
-var sanitize = function(string, pattern, caretPosition){
+var sanitize = function(string, pattern){
   string = removeStatics(string, pattern.statics);
   var inputs = pattern.inputs;
   var newString = '';
   var inputIndex = 0;
-
-  /*if(string.length > inputs.length){
-    var difference = string.length - inputs.length;
-    var start = caretPosition - difference;
-    var end = caretPosition;
-    string = string.slice(0, start) + string.slice(end, string.length);
-  }*/
 
   for(var i = 0; i < string.length && inputIndex < inputs.length; i++){
     if(defaultPatterns[inputs[inputIndex]].test(string[i])){
@@ -115,14 +108,32 @@ module.exports = React.createClass({
     );
   },
 
+  componentDidUpdate: function(){
+    if(this.state.rawCaretPosition !== undefined){
+      var input = this.getInputDOMNode();
+
+      var formattedCaretPosition = this.formatValue(this.state.rawValue.slice(0, this.state.rawCaretPosition)).length;
+
+      caret.setPosition(input, formattedCaretPosition);
+    }
+  },
+
   handleChange: function(event){
-    //console.log(caret.getPosition(this.getInputDOMNode()));
-    var value = event.target.value;
     var pattern = this.state.pattern;
-    var rawValue = sanitize(value, pattern);
+    var caretPosition = caret.getPosition(this.getInputDOMNode());
+
+    var value = event.target.value;
+    var rawBeforeCaret = sanitize(value.slice(0, caretPosition), pattern);
+    var rawAfterCaret = sanitize(value.slice(caretPosition, value.length), pattern);
+
+    if((rawBeforeCaret.length + rawAfterCaret.length) > pattern.inputs.length){
+      rawBeforeCaret = rawBeforeCaret.slice(0, pattern.inputs.length - rawAfterCaret.length);
+    }
+
+    var rawValue = rawBeforeCaret + rawAfterCaret;
     this.setState({
       rawValue: rawValue,
-      forward: rawValue.length > this.state.rawValue.length
+      rawCaretPosition: rawBeforeCaret.length
     }, function(){
       this.props.onChange(event);
     });

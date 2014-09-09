@@ -18,10 +18,10 @@ exports.getPosition = function(elem){
 
 exports.setPosition = function(elem, position){
   if(elem.setSelectionRange) {
-		ctrl.setSelectionRange(position, position);
+		elem.setSelectionRange(position, position);
 	}
-	else if (ctrl.createTextRange) {
-		var range = ctrl.createTextRange();
+	else if (elem.createTextRange) {
+		var range = elem.createTextRange();
 		range.collapse(true);
 		range.moveEnd('character', position);
 		range.moveStart('character', position);
