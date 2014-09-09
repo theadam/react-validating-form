@@ -38,19 +38,19 @@ var removeStatics = function(string, statics){
 };
 
 var defaultPatterns = {
-  '9': /[0-9]/,
+  '#': /[0-9]/,
   'a': /[A-Za-z]/,
   '*': /[A-Za-z0-9]/
 };
 
-var sanitize = function(string, pattern){
+var sanitize = function(string, pattern, inputTypes){
   string = removeStatics(string, pattern.statics);
   var inputs = pattern.inputs;
   var newString = '';
   var inputIndex = 0;
-
+  var patterns = _.merge(defaultPatterns, inputTypes);
   for(var i = 0; i < string.length && inputIndex < inputs.length; i++){
-    if(defaultPatterns[inputs[inputIndex]].test(string[i])){
+    if(patterns[inputs[inputIndex]].test(string[i])){
       newString += string[i];
       inputIndex++;
     }
@@ -81,7 +81,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function(){
     return {
-      onChange: _.noop
+      onChange: _.noop,
+      inputTypes: {}
     };
   },
 
@@ -123,8 +124,8 @@ module.exports = React.createClass({
     var caretPosition = caret.getPosition(this.getInputDOMNode());
 
     var value = event.target.value;
-    var rawBeforeCaret = sanitize(value.slice(0, caretPosition), pattern);
-    var rawAfterCaret = sanitize(value.slice(caretPosition, value.length), pattern);
+    var rawBeforeCaret = sanitize(value.slice(0, caretPosition), pattern, this.props.inputTypes);
+    var rawAfterCaret = sanitize(value.slice(caretPosition, value.length), pattern, this.props.inputTypes);
 
     if((rawBeforeCaret.length + rawAfterCaret.length) > pattern.inputs.length){
       rawBeforeCaret = rawBeforeCaret.slice(0, pattern.inputs.length - rawAfterCaret.length);

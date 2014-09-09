@@ -62,7 +62,7 @@ var userSchema = Schema({
   }
 });
 
-var phoneNumberPattern = '({{999}}) {{999}}-{{9999}}';
+var phoneNumberPattern = '({{###}}) {{###}}-{{####}}';
 
 var Example1 = React.createClass({
 
