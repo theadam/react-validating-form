@@ -7,6 +7,12 @@ var caret = require('./utils/caret');
 var pattern = /{{([^}]+)}}/g;
 var matchOffset = 4;
 
+/**
+ * Parses a pattern like:
+ * ({{###}}) {{###}}-{{####}}
+ * into an object with the location of static components (like '(,), , -'),
+ * and compenents that match input (the '#'s)
+ */
 var parsePattern = function(value){
   var info = {inputs: '', statics: {}};
   var i = 0;
@@ -27,6 +33,9 @@ var parsePattern = function(value){
   return info;
 };
 
+/**
+ * Removes static portions of the given pattern from the string
+ */
 var removeStatics = function(string, statics){
   var newString = '';
   for(var i = 0; i < string.length; i++){
@@ -43,6 +52,10 @@ var defaultPatterns = {
   '*': /[A-Za-z0-9]/
 };
 
+/**
+ * Sanitizes the string against the pattern by first removing all the static portions
+ * then only keeping the characters that match the given input matching characters.
+ */
 var sanitize = function(string, pattern, inputTypes){
   string = removeStatics(string, pattern.statics);
   var inputs = pattern.inputs;
@@ -58,6 +71,10 @@ var sanitize = function(string, pattern, inputTypes){
   return newString;
 };
 
+/**
+ * takes a raw value, and inserts the static values in it.  For our phone number example
+ * takes: '1234567890', with the statics as defined above, and returns '(123) 456-7890'
+ */
 var addChars = function(string, statics){
   var newString = '';
   var length = _.size(statics) + string.length;
@@ -116,6 +133,7 @@ module.exports = React.createClass({
       var formattedCaretPosition = this.formatValue(this.state.rawValue.slice(0, this.state.rawCaretPosition)).length;
 
       caret.setPosition(input, formattedCaretPosition);
+      this.setState({rawCaretPosition: undefined});
     }
   },
 
