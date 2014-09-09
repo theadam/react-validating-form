@@ -122,7 +122,7 @@ module.exports = React.createClass({
 
   render: function(){
     return this.transferPropsTo(
-      <ValidatingInput ref='input' pattern={false} onChange={this.handleChange} value={this.getValue()}/>
+      <ValidatingInput ref='input' pattern={undefined} onChange={this.handleChange} value={this.getValue()}/>
     );
   },
 
