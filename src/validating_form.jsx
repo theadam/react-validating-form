@@ -89,7 +89,7 @@ module.exports = React.createClass({
       }
       else{
         component.startValidating();
-        component.props.onSubmitErrors(component.getValue());
+        component.props.onSubmitErrors(component.getValue(), errors);
       }
     });
 
