@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 var React = require('react');
 var ValidatingInput = require('./validating_input');
 var _ = require('lodash');

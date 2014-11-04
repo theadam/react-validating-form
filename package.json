@@ -2,7 +2,7 @@
   "name": "react-validating-form",
   "description": "A validating form for use with React",
   "author": "Adam Nalisnick <theadam4257@gmail.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "index.js",
   "repository": {
