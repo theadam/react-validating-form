@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 var React = require('react');
 var NestedMixin = require('./nested_mixin');
 var _ = require('lodash');

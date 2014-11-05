@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 var React = require('react/addons');
 var reactBootstrap = require('react-bootstrap');
 var _ = require('lodash');
@@ -88,7 +89,7 @@ module.exports = React.createClass({
       }
       else{
         component.startValidating();
-        component.props.onSubmitErrors(component.getValue());
+        component.props.onSubmitErrors(component.getValue(), errors);
       }
     });
 

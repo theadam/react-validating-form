@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 var React = require('react');
 var Input = require('react-bootstrap').Input;
 var _ = require('lodash');

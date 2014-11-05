@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 var _ = require('lodash');
 var React = require('react/addons');
 var cloneWithProps = React.addons.cloneWithProps;
