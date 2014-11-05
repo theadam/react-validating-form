@@ -16,7 +16,6 @@
     "form"
   ],
   "dependencies": {
-    "formatter.js": "^0.1.5",
     "lodash": "^2.4.1",
     "react": "^0.11.1",
     "react-bootstrap": "^0.11.1"

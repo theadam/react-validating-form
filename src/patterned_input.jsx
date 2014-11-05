@@ -2,7 +2,6 @@
 var React = require('react');
 var ValidatingInput = require('./validating_input');
 var _ = require('lodash');
-var Formatter = require('formatter.js');
 var caret = require('./utils/caret');
 
 var pattern = /{{([^}]+)}}/g;
